@@ -9,7 +9,7 @@ const app = {
         length: 0,
         volume:0.5,
         src: "file:///android_asset/www/media/Ghungroo.mp3",
-        path: "img/ghungroo.jpeg"
+        path: "img/ghungroo.jpg"
       },
       {
         id: 2,
@@ -97,7 +97,7 @@ const app = {
 
             console.log(element.path);
 
-            img.setAttribute('src', 'element.path');
+            img.setAttribute('src', element.path);
             img.setAttribute('alt', "Poster");
             img.setAttribute('data-id', element.id);
             h3.textContent = element.title;
