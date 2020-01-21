@@ -86,7 +86,6 @@ const app = {
         let div = document.createElement('div');
         let ul = document.createElement('ul');
         let songList = app.track;
-        //for (let i=0; i<songList.length; i++){
         console.log(songList.length);
         app.tracks = songList.length;
 
@@ -113,13 +112,9 @@ const app = {
 
             ul.appendChild(li);
         });
-        //}
-        //div.appendChild(ul);
         document.getElementById('songs').appendChild(ul);
 
         app.addListeners();
-        // let src = app.track.src;
-        // app.media = new Media(src, app.ftw, app.wtf, app.statusChange);
     },
 
     ftw: function(){
@@ -183,9 +178,6 @@ const app = {
 
          app.media = new Media(src, app.ftw, app.wtf, app.stat);
 
-        //let src = app.track.src;
-        //app.media = new Media(src, app.ftw, app.wtf, app.statusChange);
-
             console.log(item);
             app.play();
         }else{
@@ -193,7 +185,6 @@ const app = {
         console.log(item);
         let index = item -1;
             let src = app.track[index].src;
-        // //let src = found.src;
 
          if(app.media !== null){
              app.media.release();
@@ -203,15 +194,44 @@ const app = {
          app.media = new Media(src, app.ftw, app.wtf, app.stat);
         app.play();
         }
-        
-        // let src = currentTrack.src;
-        // if(app.media !== null){
-        //     app.media.release();
-        //     app.media = null;
-        // }
+    },
 
-        // app.media = new Media(src, app.ftw, app.wtf, app.stat);
-        // app.play();
+
+    previous: function(){
+        console.log(app.currentTrack);
+        console.log(app.tracks);
+        app.currentTrack = app.currentTrack - 1;
+        if(app.currentTrack <= 0 ){
+            app.currentTrack= app.tracks;
+
+            let item = app.currentTrack;
+
+            let index = item -1;
+            let src = app.track[index].src;
+
+         if(app.media !== null){
+             app.media.release();
+             app.media = null;
+         }
+
+         app.media = new Media(src, app.ftw, app.wtf, app.stat);
+
+            console.log(item);
+            app.play();
+        }else{
+        let item = app.currentTrack;
+        console.log(item);
+        let index = item -1;
+            let src = app.track[index].src;
+
+         if(app.media !== null){
+             app.media.release();
+             app.media = null;
+         }
+
+         app.media = new Media(src, app.ftw, app.wtf, app.stat);
+        app.play();
+        }
     },
 
     playTrack: (ev)=>{
@@ -236,28 +256,7 @@ const app = {
     },
 
     play: function(){
-
-        // let index = found -1;
-        // let src = app.track[index].src;
-        // //let src = found.src;
-
-        // if(app.media !== null){
-        //     app.media.release();
-        //     app.media = null;
-        // }
-
-        // app.media = new Media(src, app.ftw, app.wtf, app.stat);
-
-        //let src = app.track.src;
-        //app.media = new Media(src, app.ftw, app.wtf, app.statusChange);
         app.media.play();
-        //let duration = app.media.getDuration();
-
-        // setTimeout(function() {
-        //     //app.media.seekTo(10000);
-        //     document.getElementById('audio_position').innerHTML = app.media.seekTo(10000);
-        // }, 5000);
-
 
         app.nextsong();
 
@@ -275,8 +274,6 @@ const app = {
                 let minutes = Math.floor(dur/60);
                 let seconds = dur-minutes*60;
 
-                //document.getElementById('audio_duration').innerHTML = (dur) + " sec";
-
                 document.getElementById('audio_duration').innerHTML = (minutes)+":"+(seconds);
 
             }
@@ -288,7 +285,6 @@ const app = {
                 // success callback
                 function (position) {
                     if (position > -1) {
-                        //console.log((position) + " sec");
                         document.getElementById('audio_position').innerHTML = position;
                     }
                 },
@@ -340,8 +336,6 @@ const app = {
         });
     }
 }
-
-
 
 let ready = ('cordova' in window)?"deviceready":"DOMContentLoaded";
 document.addEventListener(ready, app.init);
