@@ -130,9 +130,8 @@ const app = {
     },
 
     statusChange: function(status){
-        console.log('media status is now ' + app.status[status] );
-
         app.stat = status;
+        console.log('media status is now ' + app.status[status] );
     },
 
     addListeners: function(){
@@ -176,7 +175,7 @@ const app = {
              app.media = null;
          }
 
-         app.media = new Media(src, app.ftw, app.wtf, app.stat);
+         app.media = new Media(src, app.ftw, app.wtf, app.statusChange);
 
             console.log(item);
             app.play();
@@ -191,7 +190,7 @@ const app = {
              app.media = null;
          }
 
-         app.media = new Media(src, app.ftw, app.wtf, app.stat);
+         app.media = new Media(src, app.ftw, app.wtf, app.statusChange);
         app.play();
         }
     },
@@ -214,7 +213,7 @@ const app = {
              app.media = null;
          }
 
-         app.media = new Media(src, app.ftw, app.wtf, app.stat);
+         app.media = new Media(src, app.ftw, app.wtf, app.statusChange);
 
             console.log(item);
             app.play();
@@ -229,7 +228,7 @@ const app = {
              app.media = null;
          }
 
-         app.media = new Media(src, app.ftw, app.wtf, app.stat);
+         app.media = new Media(src, app.ftw, app.wtf, app.statusChange);
         app.play();
         }
     },
@@ -251,7 +250,9 @@ const app = {
             app.media = null;
         }
 
-        app.media = new Media(src, app.ftw, app.wtf, app.stat);
+        app.media = new Media(src, app.ftw, app.wtf, app.statusChange);
+        
+        //app.nextsong();
         app.play();    
     },
 
@@ -273,8 +274,10 @@ const app = {
 
                 let minutes = Math.floor(dur/60);
                 let seconds = dur-minutes*60;
+                let min = minutes.toFixed(2);
+                let sec = seconds.toFixed(2);
 
-                document.getElementById('audio_duration').innerHTML = (minutes)+":"+(seconds);
+                document.getElementById('audio_duration').innerHTML = minutes+":"+sec;
 
             }
         }, 100);
@@ -285,7 +288,11 @@ const app = {
                 // success callback
                 function (position) {
                     if (position > -1) {
-                        document.getElementById('audio_position').innerHTML = position;
+                        let minOfPos = Math.floor(position/60);
+                        let secOfPos = position-minOfPos*60;
+                        let secOf = secOfPos.toFixed(2);
+                        //let positionInSec = position.toFixed(2);
+                        document.getElementById('audio_position').innerHTML = minOfPos+":"+secOf;
                     }
                 },
                 // error callback
@@ -299,10 +306,14 @@ const app = {
     },
 
     nextsong: function(){
-        let check = setInterval (function() {
 
+        console.log(app.stat);
+        console.log("hi");
+        let check = setInterval (()=>{
+            console.log(app.stat);
             if(app.stat == 4){
                 app.next();
+
             }
 
             }, 1000)
