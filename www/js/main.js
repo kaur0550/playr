@@ -2,7 +2,7 @@ const app = {
     track: 
      [
       {
-        id: 1,
+        id: 134,
         artist: "Arijit Singh, Shilpa Rao",
         album: "War",
         title: "Ghungroo",
@@ -12,7 +12,7 @@ const app = {
         path: "img/ghungroo.jpg"
       },
       {
-        id: 2,
+        id: 265,
         artist: "Ed Sheeran",
         album: "Shape of You",
         title: "Shape of You",
@@ -22,7 +22,7 @@ const app = {
         path: "img/shape.jpg"
       },
       {
-        id: 3,
+        id: 543,
         artist: "Neha Kakkar, Garry Sandhu",
         album: "De De Pyaar De",
         title: "Hauli Hauli",
@@ -32,7 +32,7 @@ const app = {
         path: "img/hauli.jpg"
       },
       {
-        id: 4,
+        id: 476,
         artist: "David Guetta",
         album: "Listen",
         title: "Hey Mama",
@@ -42,7 +42,7 @@ const app = {
         path: "img/Hey_Mama.png"
       },
       {
-        id: 5,
+        id: 405,
         artist: "Macklemore",
         album: "The Heist",
         title: "Can t Hold Us",
@@ -81,12 +81,10 @@ const app = {
     },
 
     ready: function() {
-        console.log('here');
 
         let div = document.createElement('div');
         let ul = document.createElement('ul');
         let songList = app.track;
-        console.log(songList.length);
         app.tracks = songList.length;
 
         songList.forEach(element => {
@@ -94,8 +92,6 @@ const app = {
             let img = document.createElement('img');
             let h3 = document.createElement('h3');
             let p = document.createElement('p');
-
-            console.log(element.path);
 
             img.setAttribute('src', element.path);
             img.setAttribute('alt', "Poster");
@@ -120,7 +116,6 @@ const app = {
     ftw: function(){
         //success creating the media object and playing, stopping, or recording
         console.log('success doing something');
-        //app.media.play();
     },
 
     wtf: function(err){
@@ -140,7 +135,6 @@ const app = {
         songArea.addEventListener('click', app.playTrack);
 
          document.querySelector('#play-btn').addEventListener('click', app.play);
-        // document.querySelector('#play-btn').addEventListener('click', app.play);
          document.querySelector('#pause-btn').addEventListener('click', app.pause);
          document.querySelector('#ff-btn').addEventListener('click', app.ff);
          document.querySelector('#rew-btn').addEventListener('click', app.rew);
@@ -158,31 +152,21 @@ const app = {
     },
 
     next: function(){
-        console.log(app.currentTrack);
-        console.log(app.tracks);
         app.currentTrack = app.currentTrack + 1;
-        if(app.currentTrack > app.tracks){
-            app.currentTrack= 1;
-
-            let item = app.currentTrack;
-
-            let index = item -1;
+        if(app.currentTrack >= app.tracks){
+            app.currentTrack= 0;
+            let index = app.currentTrack;
             let src = app.track[index].src;
-        // //let src = found.src;
 
          if(app.media !== null){
              app.media.release();
              app.media = null;
          }
 
-         app.media = new Media(src, app.ftw, app.wtf, app.statusChange);
-
-            console.log(item);
-            app.play();
+        app.media = new Media(src, app.ftw, app.wtf, app.statusChange);
+        app.play();
         }else{
-        let item = app.currentTrack;
-        console.log(item);
-        let index = item -1;
+        let index = app.currentTrack;
             let src = app.track[index].src;
 
          if(app.media !== null){
@@ -197,15 +181,10 @@ const app = {
 
 
     previous: function(){
-        console.log(app.currentTrack);
-        console.log(app.tracks);
         app.currentTrack = app.currentTrack - 1;
-        if(app.currentTrack <= 0 ){
-            app.currentTrack= app.tracks;
-
-            let item = app.currentTrack;
-
-            let index = item -1;
+        if(app.currentTrack < 0 ){
+            app.currentTrack= app.tracks - 1;
+            let index = app.currentTrack;
             let src = app.track[index].src;
 
          if(app.media !== null){
@@ -214,13 +193,9 @@ const app = {
          }
 
          app.media = new Media(src, app.ftw, app.wtf, app.statusChange);
-
-            console.log(item);
-            app.play();
+        app.play();
         }else{
-        let item = app.currentTrack;
-        console.log(item);
-        let index = item -1;
+        let index = app.currentTrack;
             let src = app.track[index].src;
 
          if(app.media !== null){
@@ -236,13 +211,10 @@ const app = {
     playTrack: (ev)=>{
         let id = ev.target.getAttribute('data-id');
         
-        console.log(id);
-        
         let found = app.track.find(element=> element.id == id);
-        
-        app.currentTrack = found.id;
 
-        console.log(app.currentTrack);
+        app.currentTrack = app.track.findIndex(element=> element.id == id);
+
         let src = found.src;
 
         if(app.media !== null){
@@ -251,38 +223,24 @@ const app = {
         }
 
         app.media = new Media(src, app.ftw, app.wtf, app.statusChange);
-        
-        //app.nextsong();
         app.play();    
     },
 
     play: function(){
         app.media.play();
-
         app.nextsong();
 
-
-        var counter = 0;
-        var timerDur = setInterval(function() {
-            counter = counter + 100;
-            if (counter > 2000) {
-                clearInterval(timerDur);
-            }
-            var dur = app.media.getDuration();
-            if (dur > 0) {
-                clearInterval(timerDur);
-
-                let minutes = Math.floor(dur/60);
-                let seconds = dur-minutes*60;
-                let min = minutes.toFixed(2);
-                let sec = seconds.toFixed(2);
-
-                document.getElementById('audio_duration').innerHTML = minutes+":"+sec;
-
-            }
-        }, 100);
-
         var mediaTimer = setInterval(function () {
+            //get media duration
+            var dur = app.media.getDuration();
+
+            let minutes = Math.floor(dur/60);
+            let seconds = dur-minutes*60;
+            let min = minutes.toFixed(2);
+            let sec = seconds.toFixed(2);
+
+            document.getElementById('audio_duration').innerHTML = minutes+":"+sec;
+            
             // get media position
             app.media.getCurrentPosition(
                 // success callback
@@ -291,33 +249,23 @@ const app = {
                         let minOfPos = Math.floor(position/60);
                         let secOfPos = position-minOfPos*60;
                         let secOf = secOfPos.toFixed(2);
-                        //let positionInSec = position.toFixed(2);
                         document.getElementById('audio_position').innerHTML = minOfPos+":"+secOf;
                     }
                 },
                 // error callback
                 function (e) {
-                    console.log("Error getting pos=" + e);
+                    console.log("Error happened=" + e);
                 }
             );
         }, 1000);
-
-        //console.log(duration);
     },
 
     nextsong: function(){
-
-        console.log(app.stat);
-        console.log("hi");
         let check = setInterval (()=>{
-            console.log(app.stat);
             if(app.stat == 4){
                 app.next();
-
             }
-
-            }, 1000)
-
+        }, 1000)
     },
 
     pause: function(){
@@ -327,8 +275,6 @@ const app = {
     ff: function(){
         app.media.getCurrentPosition((pos)=>{
             let dur = app.media.getDuration();
-            console.log('current position', pos);
-            console.log('duration', dur);
             pos += 10;
             if(pos < dur){
                 app.media.seekTo( pos * 1000 );
