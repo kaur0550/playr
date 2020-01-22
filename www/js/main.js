@@ -3,7 +3,7 @@ const app = {
      [
       {
         id: 134,
-        artist: "Arijit Singh, Shilpa Rao",
+        artist: "Arijit Singh",
         album: "War",
         title: "Ghungroo",
         length: 0,
@@ -23,7 +23,7 @@ const app = {
       },
       {
         id: 543,
-        artist: "Neha Kakkar, Garry Sandhu",
+        artist: "Neha Kakkar",
         album: "De De Pyaar De",
         title: "Hauli Hauli",
         length: 0,
@@ -163,6 +163,25 @@ const app = {
              app.media = null;
          }
 
+        let div_currentSong = document.createElement('div');
+        let img_currentSong = document.createElement('img');
+        let h3_currentSong = document.createElement('h3');
+        let p_currentSong = document.createElement('p');
+
+        img_currentSong.setAttribute('src', app.track[index].path);
+        img_currentSong.setAttribute('alt', "Poster");
+        h3_currentSong.textContent = app.track[index].title;
+        p_currentSong.textContent = app.track[index].artist;
+
+        div_currentSong.appendChild(img_currentSong);
+        div_currentSong.appendChild(h3_currentSong);
+        div_currentSong.appendChild(p_currentSong);
+
+        document.getElementById('song-info').innerHTML = " ";
+        document.getElementById('song-info').appendChild(div_currentSong);
+
+        //app.display()
+
         app.media = new Media(src, app.ftw, app.wtf, app.statusChange);
         app.play();
         }else{
@@ -173,6 +192,26 @@ const app = {
              app.media.release();
              app.media = null;
          }
+
+         
+        let div_currentSong = document.createElement('div');
+        let img_currentSong = document.createElement('img');
+        let h3_currentSong = document.createElement('h3');
+        let p_currentSong = document.createElement('p');
+
+        img_currentSong.setAttribute('src', app.track[index].path);
+        img_currentSong.setAttribute('alt', "Poster");
+        h3_currentSong.textContent = app.track[index].title;
+        p_currentSong.textContent = app.track[index].artist;
+
+        div_currentSong.appendChild(img_currentSong);
+        div_currentSong.appendChild(h3_currentSong);
+        div_currentSong.appendChild(p_currentSong);
+
+        document.getElementById('song-info').innerHTML = " ";
+        document.getElementById('song-info').appendChild(div_currentSong);
+
+        //app.display();
 
          app.media = new Media(src, app.ftw, app.wtf, app.statusChange);
         app.play();
@@ -192,6 +231,26 @@ const app = {
              app.media = null;
          }
 
+         
+        let div_currentSong = document.createElement('div');
+        let img_currentSong = document.createElement('img');
+        let h3_currentSong = document.createElement('h3');
+        let p_currentSong = document.createElement('p');
+
+        img_currentSong.setAttribute('src', app.track[index].path);
+        img_currentSong.setAttribute('alt', "Poster");
+        h3_currentSong.textContent = app.track[index].title;
+        p_currentSong.textContent = app.track[index].artist;
+
+        div_currentSong.appendChild(img_currentSong);
+        div_currentSong.appendChild(h3_currentSong);
+        div_currentSong.appendChild(p_currentSong);
+
+        document.getElementById('song-info').innerHTML = " ";
+        document.getElementById('song-info').appendChild(div_currentSong);
+
+        //app.display();
+
          app.media = new Media(src, app.ftw, app.wtf, app.statusChange);
         app.play();
         }else{
@@ -203,10 +262,50 @@ const app = {
              app.media = null;
          }
 
+         
+        let div_currentSong = document.createElement('div');
+        let img_currentSong = document.createElement('img');
+        let h3_currentSong = document.createElement('h3');
+        let p_currentSong = document.createElement('p');
+
+        img_currentSong.setAttribute('src', app.track[index].path);
+        img_currentSong.setAttribute('alt', "Poster");
+        h3_currentSong.textContent = app.track[index].title;
+        p_currentSong.textContent = app.track[index].artist;
+
+        div_currentSong.appendChild(img_currentSong);
+        div_currentSong.appendChild(h3_currentSong);
+        div_currentSong.appendChild(p_currentSong);
+
+        document.getElementById('song-info').innerHTML = " ";
+        document.getElementById('song-info').appendChild(div_currentSong);
+
+        //app.display();
+
          app.media = new Media(src, app.ftw, app.wtf, app.statusChange);
         app.play();
         }
     },
+
+    // display: function(){
+        
+    //     let div_currentSong = document.createElement('div');
+    //     let img_currentSong = document.createElement('img');
+    //     let h3_currentSong = document.createElement('h3');
+    //     let p_currentSong = document.createElement('p');
+
+    //     img_currentSong.setAttribute('src', app.track[index].path);
+    //     img_currentSong.setAttribute('alt', "Poster");
+    //     h3_currentSong.textContent = app.track[index].title;
+    //     p_currentSong.textContent = app.track[index].artist;
+
+    //     div_currentSong.appendChild(img_currentSong);
+    //     div_currentSong.appendChild(h3_currentSong);
+    //     div_currentSong.appendChild(p_currentSong);
+
+    //     document.getElementById('song-info').innerHTML = " ";
+    //     document.getElementById('song-info').appendChild(div_currentSong);
+    // },
 
     playTrack: (ev)=>{
         let id = ev.target.getAttribute('data-id');
@@ -222,11 +321,36 @@ const app = {
             app.media = null;
         }
 
+        let div_currentSong = document.createElement('div');
+        let img_currentSong = document.createElement('img');
+        let h3_currentSong = document.createElement('h3');
+        let p_currentSong = document.createElement('p');
+
+        img_currentSong.setAttribute('src', found.path);
+        img_currentSong.setAttribute('alt', "Poster");
+        h3_currentSong.textContent = found.title;
+        p_currentSong.textContent = found.artist;
+
+        div_currentSong.appendChild(img_currentSong);
+        div_currentSong.appendChild(h3_currentSong);
+        div_currentSong.appendChild(p_currentSong);
+
+        document.getElementById('song-info').innerHTML = " ";
+        document.getElementById('song-info').appendChild(div_currentSong);
+
         app.media = new Media(src, app.ftw, app.wtf, app.statusChange);
         app.play();    
     },
 
     play: function(){
+
+        document.getElementById('play-btn').classList.remove("show");
+        document.getElementById('play-btn').classList.add("hide");
+        document.getElementById('pause-btn').classList.remove("hide");
+        document.getElementById('pause-btn').classList.add("show");
+        document.getElementById('second').classList.remove("hide");
+        document.getElementById('second').classList.add("show");
+
         app.media.play();
         app.nextsong();
 
@@ -269,6 +393,10 @@ const app = {
     },
 
     pause: function(){
+        document.getElementById('pause-btn').classList.remove('show');
+        document.getElementById('pause-btn').classList.add('hide');
+        document.getElementById('play-btn').classList.remove('hide');
+        document.getElementById('play-btn').classList.add('show');
         app.media.pause();
     },
 

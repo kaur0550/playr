@@ -1,5 +1,12 @@
 * {margin: 0; padding: 0;}
 
+h1 {
+  font-size: 2rem;
+  padding: 0.3rem;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
 div {
   margin: 20px;
 }
@@ -17,6 +24,7 @@ li img {
   float: left;
   margin: 0 15px 0 0;
   width:50px;
+  height: 50px;
 }
 
 li p {
@@ -31,4 +39,36 @@ li {
 li:hover {
   background: #eee;
   cursor: pointer;
+}
+
+#song-position{
+  display:flex;
+  justify-content: space-between;
+}
+
+.app{
+  display:flex;
+  justify-content: space-between;
+}
+
+#second{
+  background-color: darksalmon;
+}
+
+#song-info img{
+  width: 100px;
+  height:100px;
+  padding:0.4rem;
+}
+#song-info{
+  display: flex;
+  justify-content: center;
+}
+
+.show{
+  display: block;
+}
+
+.hide{
+  display: none;;
 }
