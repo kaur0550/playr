@@ -18,6 +18,27 @@
     <allow-intent href="geo:*" />
     <platform name="android">
         <allow-intent href="market:*" />
+        <icon src = "/res/icon/android/musichdpi.png" density = "hdpi" />
+        <icon src = "/res/icon/android/musicmdpi.png" density = "mdpi" />
+        <icon src = "/res/icon/android/musicxhdpi.png" density = "xhdpi" />
+        <icon src = "/res/icon/android/musicxxhdpi.png" density = "xxhdpi" />
+        <icon src = "/res/icon/android/musicxxxhdpi.png" density = "xxxhdpi" />
+
+        <splash src = "/res/screen/android/HDPI_Land.png" density = "land-hdpi"/>
+        <splash src = "/res/screen/android/HDPI_Port.png" density = "port-hdpi"/>
+        <splash src = "/res/screen/android/MDPI_Land.png" density = "land-mdpi"/>
+        <splash src = "/res/screen/android/MDPI_port.png" density = "port-mdpi"/>
+        <splash src = "/res/screen/android/XHDPI_Land.png" density = "land-xhdpi"/>
+        <splash src = "/res/screen/android/XHDPI_Port.png" density = "port-xhdpi"/>
+
+        
+        <splash src = "/res/screen/android/XXHDPI_Land.png" density = "land-xxhdpi"/>
+        <splash src = "/res/screen/android/XXHDPI_Port.png" density = "port-xxhdpi"/>
+        <splash src = "/res/screen/android/XXXHDPI_Land.png" density = "land-xxxhdpi"/>
+        <splash src = "/res/screen/android/XXXHDPI_Port.png" density = "port-xxxhdpi"/>
+
+        <preference name="AutoHideSplashScreen" value="true" />
+        <preference name="SplashScreenDelay" value="3000" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
