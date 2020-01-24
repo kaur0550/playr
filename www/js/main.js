@@ -350,6 +350,8 @@ const app = {
         document.getElementById('pause-btn').classList.add("show");
         document.getElementById('second').classList.remove("hide");
         document.getElementById('second').classList.add("show");
+        document.getElementById('visual').classList.remove('hide');
+        document.getElementById('visual').classList.add('show');
 
         app.media.play();
         app.nextsong();
@@ -359,11 +361,12 @@ const app = {
             var dur = app.media.getDuration();
 
             let minutes = Math.floor(dur/60);
-            let seconds = dur-minutes*60;
-            let min = minutes.toFixed(2);
-            let sec = seconds.toFixed(2);
+            let seconds = Math.floor(dur%60);
 
-            document.getElementById('audio_duration').innerHTML = minutes+":"+sec;
+            let min = minutes.toString().padStart(2,'0');
+            let sec = seconds.toString().padStart(2,'0');
+
+            document.getElementById('audio_duration').innerHTML = min+":"+sec;
             
             // get media position
             app.media.getCurrentPosition(
@@ -371,9 +374,10 @@ const app = {
                 function (position) {
                     if (position > -1) {
                         let minOfPos = Math.floor(position/60);
-                        let secOfPos = position-minOfPos*60;
-                        let secOf = secOfPos.toFixed(2);
-                        document.getElementById('audio_position').innerHTML = minOfPos+":"+secOf;
+                        let secOfPos = Math.floor(position%60);
+                        let minOf = minOfPos.toString().padStart(2,'0');
+                        let secOf = secOfPos.toString().padStart(2,'0');
+                        document.getElementById('audio_position').innerHTML = minOf+":"+secOf;
                     }
                 },
                 // error callback
@@ -395,9 +399,16 @@ const app = {
     pause: function(){
         document.getElementById('pause-btn').classList.remove('show');
         document.getElementById('pause-btn').classList.add('hide');
+
         document.getElementById('play-btn').classList.remove('hide');
         document.getElementById('play-btn').classList.add('show');
+
+        document.getElementById('visual').classList.remove('show');
+        document.getElementById('visual').classList.add('hide');
         app.media.pause();
+
+        clearInterval(mediaTimer);
+        clearInterval(check);
     },
 
     ff: function(){
